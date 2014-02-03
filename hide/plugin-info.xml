@@ -1,0 +1,28 @@
+<?xml version="1.0" standalone="yes" ?>
+<plugin id="CerealGuy:HideMod">
+	<name>HideMod</name>
+	<author>CerealGuy</author>
+	<description>Enable [hide] and [hide-reply] bbcodes.</description>
+	<version>1.0</version>
+	<settings>
+		<setting name="hidemod_sa1" default="&lt;center&gt;Hidden Content:&lt;/center&gt;" />
+		<setting name="hidemod_sa2" default="" />
+		<setting name="hidemod_sb1" default="#000000" />
+		<setting name="hidemod_sb2" default="" />
+	</settings>
+	<settings-page area="hidemod">
+		<language file="$plugindir/lang/HideMod-Admin" />
+		<text name="hidemod_sa1" />
+		<text name="hidemod_sa2" />
+		<text name="hidemod_sb1" />
+		<text name="hidemod_sb2" />
+	</settings-page>
+
+
+	<hooks>
+		<function point="display_post_done" function="hmDisplayPostDone" filename="$plugindir/src/HideMod.Main" />
+		
+	</hooks>
+	<acp-url>action=admin;area=hidemod</acp-url>
+
+</plugin>
