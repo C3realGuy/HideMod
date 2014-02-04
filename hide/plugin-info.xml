@@ -7,15 +7,20 @@
 	<settings>
 		<setting name="hidemod_sa1" default="&lt;center&gt;Hidden Content:&lt;/center&gt;" />
 		<setting name="hidemod_sa2" default="" />
-		<setting name="hidemod_sb1" default="#000000" />
+		<setting name="hidemod_sa3" default="" />
+		<setting name="hidemod_sb1" default="" />
 		<setting name="hidemod_sb2" default="" />
+		<setting name="hidemod_sb3" default="" />
 	</settings>
 	<settings-page area="hidemod">
-		<language file="$plugindir/lang/HideMod-Admin" />
+		<language file="lang/HideModAdmin" />
 		<text name="hidemod_sa1" />
 		<text name="hidemod_sa2" />
+		<text name="hidemod_sa3" />
+		<hr />
 		<text name="hidemod_sb1" />
 		<text name="hidemod_sb2" />
+		<text name="hidemod_sb3" />
 	</settings-page>
 
 
