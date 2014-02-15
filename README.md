@@ -3,6 +3,10 @@ HideMod v1.0 (alpha)
 Hey here is my first plugin for wedge :)
 Its a simple HideMod. It supports [hide] (you need to like) and [hide-reply].
 
+Features:
+  - hide and hide-reply
+  - fully changeable html code for locked/unlocked before and after...
+
 Installation:
 
 Drop "hide" folder in your /wedgefolder/plugins and activate it in the adminpanel.
@@ -15,7 +19,7 @@ Unter Plugins --> HideMod:
 [hide] unlocked before: <center><div id="profile_success" class="windowbg">Unhidden Content:</div></center>
 
 
-[hide-reply] Locked: <div id="profile_error" class="windowbg">Du musst antworten um den Inhalt sehen zu können.</div>
+[hide-reply] Locked: <center><div id="profile_error" class="windowbg">Du musst antworten um den Inhalt sehen zu können.</div></center>
 
 [hide-reply] unlocked before: <center><div id="profile_success" class="windowbg">Unhidden Content:</div></center>
 

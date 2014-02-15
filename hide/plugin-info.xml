@@ -5,12 +5,14 @@
 	<description>Enable [hide] and [hide-reply] bbcodes.</description>
 	<version>1.0</version>
 	<settings>
-		<setting name="hidemod_sa1" default="&lt;center&gt;Hidden Content:&lt;/center&gt;" />
-		<setting name="hidemod_sa2" default="" />
-		<setting name="hidemod_sa3" default="" />
-		<setting name="hidemod_sb1" default="" />
-		<setting name="hidemod_sb2" default="" />
-		<setting name="hidemod_sb3" default="" />
+		<setting name="hidemod_sa1" default="&lt;center&gt;Hidden Content:&lt;br&gt;Like to see content&lt;/center&gt;" /> <!-- locked hide -->
+		<setting name="hidemod_sa2" default="&lt;center&gt;unHidden Content:&lt;/center&gt;" /> <!-- unlocked hide before -->
+		<setting name="hidemod_sa3" default="" /> <!-- unlocked hide after -->
+		<setting name="hidemod_sb1" default="&lt;center&gt;Hidden Content:&lt;br&gt;Reply to see content&lt;/center&gt;" /> <!-- locked hide-reply -->
+		<setting name="hidemod_sb2" default="&lt;center&gt;unHidden Content:&lt;/center&gt;" /> <!-- unlocked hide-reply before -->
+		<setting name="hidemod_sb3" default="" /> <!-- unlocked hide-reply after -->
+		<setting name="hidemod_sc1" default="*** HIDDEN CONTENT LIKE TO SEE IT ***" /> <!-- quote like msg -->
+		<setting name="hidemod_sc2" default="*** HIDDEN CONTENT REPLY TO SEE IT ***" /> <!-- quote reply msg -->
 	</settings>
 	<settings-page area="hidemod">
 		<language file="lang/HideModAdmin" />
@@ -21,11 +23,15 @@
 		<text name="hidemod_sb1" />
 		<text name="hidemod_sb2" />
 		<text name="hidemod_sb3" />
+		<hr />
+		<text name="hidemod_sc1" />
+		<text name="hidemod_sc2" />
 	</settings-page>
 
 
 	<hooks>
 		<function point="display_post_done" function="hmDisplayPostDone" filename="$plugindir/src/HideMod.Main" />
+		<function point="quote_fast_done" function="hmQuoteFastDone" filename="$plugindir/src/HideMod.Main" />
 		
 	</hooks>
 	<acp-url>action=admin;area=hidemod</acp-url>
