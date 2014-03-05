@@ -67,4 +67,4 @@ To-Do:
 - block unlike?!
 - on like automatic reload of page
 - as soon as wedge adds a similar hook for quote_fast_done im going to rewrite the hole code
-
+- IMPORTANT: hook into parse_bbc --> posts on profile, perhaps search and of course display
