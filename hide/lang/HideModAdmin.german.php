@@ -9,3 +9,4 @@ $txt['hidemod_sb3'] = "[hide-reply] unlocked after:";
 $txt['hidemod_sc1'] = "[hide] in quote:";
 $txt['hidemod_sc2'] = "[hide-reply] in quote:";
 
+

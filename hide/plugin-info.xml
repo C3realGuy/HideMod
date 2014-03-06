@@ -32,6 +32,7 @@
 	<hooks>
 		<function point="display_post_done" function="hmDisplayPostDone" filename="$plugindir/src/HideMod.Main" />
 		<function point="quote_fast_done" function="hmQuoteFastDone" filename="$plugindir/src/HideMod.Main" />
+		<function point="post_bbc_parse" function="hmPostBBCParse" filename="$plugindir/src/HideMod.Main" />
 		
 	</hooks>
 	<acp-url>action=admin;area=hidemod</acp-url>
