@@ -47,8 +47,7 @@ Changelog:
   - updated hmPostBBCParse to support type (you need latest commit)
   - fixxed disabled boards (wrong var)
 0.4
-  - changed from display_post_done to post_bbc_parse
-    - fixxed transparent hide in search & profiles
+  - changed from display_post_done to post_bbc_parse (fixxed search & profile posts)
   - added disabled boards in settings
   - fixxed some stuff
 0.3
