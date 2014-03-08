@@ -42,32 +42,6 @@ Unter Plugins --> HideMod:
 Rest bleibt leer ;)
 
 
-Changelog:
-0.4.1
-  - updated hmPostBBCParse to support type (you need latest commit)
-  - fixxed disabled boards (wrong var)
-0.4
-  - changed from display_post_done to post_bbc_parse (fixxed search & profile posts)
-  - added disabled boards in settings
-  - fixxed some stuff
-0.3
-  - add hmQuoteFastDone (have a look into Installation for more info)
-  - fixxed empty value of hidemod_sa3 & hidemod_sb3 (throwed an error)
-  - added hidemod_sc1 & hidemod_sc2 which are the messages with which [hide]...[/hide] and [hide-reply]...[/hide-reply] are replaced in quote
-  - added settings for quote messages
-  - cleaned up code a bit (see To-Do)
-  - removed quote fix from todo
-0.2
-  - Fixxed settings
-  - added language
-  - added hide-reply
-
-0.1
-  - alpha commit
-	
-
-
-
 To-Do:
 - Plugin icon
 - Better Html
