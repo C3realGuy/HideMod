@@ -1,12 +1,15 @@
 HideMod v1.0 (alpha)
 --------------------
-Hey here is my first plugin for wedge :)
-Its a simple HideMod. It supports [hide] (you need to like) and [hide-reply].
+Hey there,
+thats my first plugin for wedge, im not very experienced with it till now, therefore i would be happy about
+some feedback :).
+
 
 Features:
 ---------
   - hide and hide-reply
   - fully changeable html code for locked/unlocked before and after...
+  - Disable Hide in specific boards
 
 Installation:
 -------------
