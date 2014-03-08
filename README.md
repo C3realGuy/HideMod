@@ -43,6 +43,7 @@ Rest bleibt leer ;)
 
 
 To-Do:
+------
 - Plugin icon
 - Better Html
 - block unlike?!
