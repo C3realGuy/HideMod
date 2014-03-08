@@ -43,6 +43,14 @@ Rest bleibt leer ;)
 
 
 Changelog:
+0.4.1
+  - updated hmPostBBCParse to support type (you need latest commit)
+  - fixxed disabled boards (wrong var)
+0.4
+  - changed from display_post_done to post_bbc_parse
+    - fixxed transparent hide in search & profiles
+  - added disabled boards in settings
+  - fixxed some stuff
 0.3
   - add hmQuoteFastDone (have a look into Installation for more info)
   - fixxed empty value of hidemod_sa3 & hidemod_sb3 (throwed an error)
@@ -67,4 +75,3 @@ To-Do:
 - block unlike?!
 - on like automatic reload of page
 - as soon as wedge adds a similar hook for quote_fast_done im going to rewrite the hole code
-- IMPORTANT: hook into parse_bbc --> posts on profile, perhaps search and of course display

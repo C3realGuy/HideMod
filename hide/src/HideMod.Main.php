@@ -1,4 +1,8 @@
 <?php
+
+if (!defined('WEDGE'))
+	die('Hacking attempt...');
+
 global $pattern_search_bbc, $pattern_search_hide, $pattern_search_hide_reply;
 $pattern_search_bbc = '/\[{}\](.*?)\[\/{}\]/'; //regex for bbcode
 $pattern_search_hide = str_replace("{}", "hide", $pattern_search_bbc);
@@ -7,23 +11,29 @@ $pattern_search_hide_reply = str_replace("{}", "hide-reply", $pattern_search_bbc
 
 function hmQuoteFastDone(&$xml, &$post_id, &$row){
 	global $pattern_search_hide, $pattern_search_hide_reply, $settings;
-	if(allowed_to_see($row['id_member'])){
-
+	if(we::$is['admin'] or we::$user['mod_cache']['id'] == $row['id_member']){
+		//User is admin or 
 		return;
 	}
 	if(!user_has_replied_to_topic($row['id_topic'])){
-		$xml = preg_replace($pattern_search_hide_reply, "*** HIDDEN CONTENT REPLY TO SEE IT ***", $xml);
+		$xml = preg_replace($pattern_search_hide_reply, $settings['hidemod_sc2'], $xml);
         }
 	if(!user_has_liked_post($post_id)){
-		$xml = preg_replace($pattern_search_hide, "*** HIDDEN CONTENT LIKE TO SEE IT ***", $xml);
+		$xml = preg_replace($pattern_search_hide, $settings['hidemod_sc1'], $xml);
         }
 
 }
 
-function hmPostBBCParse(&$message, &$bbc_options){
-	global $context, $settings, $pattern_search_bbc, $pattern_search_hide, $pattern_search_hide_reply, $topicinfo, $topic;
-	if(isset($bbc_options['cache'])){
+function hmPostBBCParse(&$message, &$bbc_options, &$type){
+	global $context, $settings, $pattern_search_bbc, $pattern_search_hide, $pattern_search_hide_reply, $topicinfo, $topic, $board;
+	$allowed_types = array('post', 'post-preview'); //perhaps interesting for tweaking at some day
+	$disabled_boards = !empty($settings['hidemod_disabled_boards']) ? unserialize($settings['hidemod_disabled_boards']) : array(); // nice line, modified from TopicSolved, prepares board settings from acp
+
+	if(isset($bbc_options['cache']) and isset($topic) and in_array($type, $allowed_types)){
 		$god = allowed_to_see($topicinfo['id_member_started']);
+		if(in_array($board, $disabled_boards)){ // check if board is in disabled_boards (settings in acp)
+			$god = true;
+		}
 		if($god or user_has_liked_post($bbc_options['cache'])){
 			$message = preg_replace('/\[hide\]/', $settings['hidemod_sa2'], $message);
 

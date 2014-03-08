@@ -13,6 +13,7 @@
 		<setting name="hidemod_sb3" default="" /> <!-- unlocked hide-reply after -->
 		<setting name="hidemod_sc1" default="*** HIDDEN CONTENT LIKE TO SEE IT ***" /> <!-- quote like msg -->
 		<setting name="hidemod_sc2" default="*** HIDDEN CONTENT REPLY TO SEE IT ***" /> <!-- quote reply msg -->
+		<setting name="hidemod_disabled_boards" default="" />
 	</settings>
 	<settings-page area="hidemod">
 		<language file="lang/HideModAdmin" />
@@ -26,11 +27,12 @@
 		<hr />
 		<text name="hidemod_sc1" />
 		<text name="hidemod_sc2" />
+		<hr />
+		<boards name="hidemod_disabled_boards" />
 	</settings-page>
 
 
 	<hooks>
-		<function point="display_post_done" function="hmDisplayPostDone" filename="$plugindir/src/HideMod.Main" />
 		<function point="quote_fast_done" function="hmQuoteFastDone" filename="$plugindir/src/HideMod.Main" />
 		<function point="post_bbc_parse" function="hmPostBBCParse" filename="$plugindir/src/HideMod.Main" />
 		
