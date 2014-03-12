@@ -43,6 +43,10 @@ Rest bleibt leer ;)
 
 
 Changelog:
+0.5
+  - Cleaned up Code (Subs.php)
+  - overwrote Like function for disabling unlike of posts with [hide]
+  - removed "blocking unlike" from ToDo
 0.4.1
   - updated hmPostBBCParse to support type (you need latest commit)
   - fixxed disabled boards (wrong var)
@@ -69,8 +73,8 @@ Changelog:
 
 
 To-Do:
+- on like automatic reload of page
+- Remove unlike text from posts with hide
+- as soon as wedge adds a similar hook for quote_fast_done im going to rewrite the hole code
 - Plugin icon
 - Better Html
-- block unlike?!
-- on like automatic reload of page
-- as soon as wedge adds a similar hook for quote_fast_done im going to rewrite the hole code

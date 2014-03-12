@@ -1,15 +1,10 @@
 <?php
-
+// CerealGuy:HideMod
 if (!defined('WEDGE'))
 	die('Hacking attempt...');
 
-global $pattern_search_bbc, $pattern_search_hide, $pattern_search_hide_reply;
-$pattern_search_bbc = '/\[{}\](.*?)\[\/{}\]/'; //regex for bbcode
-$pattern_search_hide = str_replace("{}", "hide", $pattern_search_bbc);
-$pattern_search_hide_reply = str_replace("{}", "hide-reply", $pattern_search_bbc); //regex for hide-reply
-
-
 function hmQuoteFastDone(&$xml, &$post_id, &$row){
+	loadPluginSource('CerealGuy:HideMod', 'src/HideMod-Subs'); 
 	global $pattern_search_hide, $pattern_search_hide_reply, $settings;
 	if(we::$is['admin'] or we::$user['mod_cache']['id'] == $row['id_member']){
 		//User is admin or 
@@ -25,6 +20,7 @@ function hmQuoteFastDone(&$xml, &$post_id, &$row){
 }
 
 function hmPostBBCParse(&$message, &$bbc_options, &$type){
+	loadPluginSource('CerealGuy:HideMod', 'src/HideMod-Subs'); 
 	global $context, $settings, $pattern_search_bbc, $pattern_search_hide, $pattern_search_hide_reply, $topicinfo, $topic, $board;
 	$allowed_types = array('post', 'post-preview'); //perhaps interesting for tweaking at some day
 	$disabled_boards = !empty($settings['hidemod_disabled_boards']) ? unserialize($settings['hidemod_disabled_boards']) : array(); // nice line, modified from TopicSolved, prepares board settings from acp
@@ -54,52 +50,10 @@ function hmPostBBCParse(&$message, &$bbc_options, &$type){
 
 }
 
-
-
-
-function allowed_to_see($id_member_started){
-	//checks if user is allowed to see this hide
-	// returns true if user is admin or user is poster
-
-	global $topicinfo;
-	if(we::$user['mod_cache']['id'] == $id_member_started){
-		return true;
-	}
-	if(we::$is['admin']){
-		return true;
-	}
-	return false;
+function hmActionList(){
+	//Overwrite like function
+	global $action_list;
+	$action_list['like'] = array("src/HideMod-Subs", "hmLike", "CerealGuy:HideMod");
 
 }
 
-	
-
-function user_has_replied_to_topic($topicid){
-	$query = wesql::query("SELECT * 
-				FROM {db_prefix}messages 
-				WHERE id_topic = {int:id_topic} 
-				and id_member = {int:id_user} LIMIT 1",	array(
-					'id_topic' => $topicid,
-					'id_user' => we::$user['mod_cache']['id']));
-	if(wesql::num_rows($query) > 0){
-		return true;
-	}
-	return false;
-					
-
-}
-
-function user_has_liked_post($postid){
-	$result = wesql::query('SELECT * FROM {db_prefix}likes WHERE id_content = {int:post_id} AND content_type = "post" AND id_member = {int:member_id}', 
-			array(
-				'member_id' => we::$user['mod_cache']['id'],
-				'post_id' => $postid,
-			)
-		);
-	//print_r($result);
-	if(wesql::num_rows($result) > 0){
-		return true;
-	}
-	return false;
-}
-?>
