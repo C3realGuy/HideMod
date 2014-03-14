@@ -13,6 +13,9 @@ function hmLike()
 	global $topic, $context, $settings;
 	global $pattern_search_bbc, $pattern_search_hide; //HM: Some globals we need
 	loadSource('Like'); //HM: We only overwrite Like but we also need DisplayLike
+	$dont_allowed_to_dislike_hide = true; //tweaking for debug, should normally be true
+	$contains_hide = false;
+
 	//log_error("w000t");
 	if (isset($_REQUEST['sa']) && $_REQUEST['sa'] == 'view')
 		return DisplayLike();
@@ -92,7 +95,8 @@ function hmLike()
 
 	if (empty($id_content) || empty($content_type))
 		fatal_lang_error('no_access', false);
-
+	
+	$contains_hide = match_post_regex($id_content, $pattern_search_hide);
 	// Does the current user already like said content?
 	$request = wesql::query('
 		SELECT like_time
@@ -108,14 +112,20 @@ function hmLike()
 	);
 
 	$like_time = time();
+
 	if ($row = wesql::fetch_row($request))
 	{
 		//HM: Disable unlike if post contains [hide] bbc.
 		//log_error(match_post_regex($id_content, $pattern_search_hide));
 		//log_error($content_type);
-		if($content_type == 'post' and match_post_regex($id_content, $pattern_search_hide)){
-			log_error("heyyy");
-			$now_liked = true;
+		$new_like = false;
+
+		if($content_type == 'post' and match_post_regex($id_content, $pattern_search_hide) and $dont_allowed_to_dislike_hide == true){
+			//log_error("heyyy");
+			// TODO Rewrite this... double code nix good code
+			$now_liked = false;
+			
+			
 
 		}else{
 			// We had a row. Kill it.
@@ -204,10 +214,22 @@ function hmLike()
 		}
 		wesql::free_result($request);
 
-		loadTemplate('Msg');
+
 
 		// Now the AJAXish data. We must be able to like it, otherwise we wouldn't be here!
-		return_callback('template_show_likes', array($id_content, true));
+		loadTemplate('Msg');
+		loadPluginTemplate('CerealGuy:HideMod', 'src/HideMod');
+		log_error($now_liked);
+		if(isset($contains_hide) and $contains_hide == true and $dont_allowed_to_dislike_hide == true and $now_liked == false){
+
+
+			return_callback('template_hm_dislike_error', array("Error: Du kannst diesen Beitrag nicht disliken.",$id_content, true));
+		}elseif(isset($contains_hide) and $contains_hide == true){
+			
+			return_callback('template_hm_reload', array($id_content, true));
+		}else{
+			return_callback('template_show_likes', array($id_content, true));
+		}
 	}
 	else
 		redirectexit($context['redirect_from_like']);
