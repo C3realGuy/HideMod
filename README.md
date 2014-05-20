@@ -47,6 +47,6 @@ Rest bleibt leer ;)
 To-Do:
 ------
 - add some more settings & language
-- as soon as wedge adds a similar hook for quote_fast_done im going to rewrite the hole code
+- as soon as wedge adds a similar hook for quote_fast_done im going to rewrite the whole code
 - Plugin icon
 - Better Html
