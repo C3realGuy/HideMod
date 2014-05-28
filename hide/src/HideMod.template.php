@@ -1,7 +1,7 @@
 <?php
 
 function template_hm_dislike_error($error, $id_msg = 0, $can_like = false){
-	echo '<script type="text/javascript">alert("'.$error.'");</script>';
+	echo '<script type="text/javascript">say("'.$error.'");</script>';
 	template_show_likes($id_msg, $can_like);
 
 }
