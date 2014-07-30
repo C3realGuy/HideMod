@@ -7,7 +7,8 @@ function hmQuoteFastDone(&$xml, &$row){
 	$post_id = $_REQUEST['quote'];
 	loadPluginSource('CerealGuy:HideMod', 'src/HideMod-Subs'); 
 	global $pattern_search_hide, $pattern_search_hide_reply, $settings;
-	if(we::$is['admin'] or we::$user['mod_cache']['id'] == $row['id_member']){
+	print $row['id_member'];
+	if(we::$is['admin'] or MID == $row['id_member']){
 		//User is admin or 
 		return;
 	}
@@ -27,7 +28,15 @@ function hmPostBBCParse(&$message, &$bbc_options, &$type){
 	$disabled_boards = !empty($settings['hidemod_disabled_boards']) ? unserialize($settings['hidemod_disabled_boards']) : array(); // nice line, modified from TopicSolved, prepares board settings from acp
 
 	if(isset($bbc_options['cache']) and isset($topic) and in_array($type, $allowed_types)){
-		$god = allowed_to_see($topicinfo['id_member_started']);
+
+		if($topicinfo['id_first_msg'] == $bbc_options['cache']){
+			// It's the first post of a topic, therefore we already have the id_member_started info
+			$god = allowed_to_see($topicinfo['id_member_started']);
+		}else{
+			// It's a post, but not the first, therefore we have to get that info
+			$god = allowed_to_see(get_post_author($bbc_options['cache']));
+			
+		}
 		if(in_array($board, $disabled_boards)){ // check if board is in disabled_boards (settings in acp)
 			$god = true;
 		}

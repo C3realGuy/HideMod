@@ -10,7 +10,6 @@ $pattern_search_hide_reply = str_replace("{}", "hide-reply", $pattern_search_bbc
 function hmLike()
 //Thats the "normal" like code from wedge, but a bit modified. Not a nice way but easiest.
 {
-	log_error("hallo");
 	global $topic, $context, $settings;
 	global $pattern_search_bbc, $pattern_search_hide; //HM: Some globals we need
 	loadSource('Like'); //HM: We only overwrite Like but we also need DisplayLike
@@ -96,7 +95,6 @@ function hmLike()
 
 	if (empty($id_content) || empty($content_type))
 		fatal_lang_error('no_access', false);
-	log_error($id_content);
 	$contains_hide = match_post_regex($id_content, $pattern_search_hide);
 	// Does the current user already like said content?
 	$request = wesql::query('
@@ -220,7 +218,6 @@ function hmLike()
 		// Now the AJAXish data. We must be able to like it, otherwise we wouldn't be here!
 		loadTemplate('Msg');
 		loadPluginTemplate('CerealGuy:HideMod', 'src/HideMod');
-		log_error($now_liked." ".$contains_hide);
 		
 		if(isset($contains_hide) and $contains_hide == true and $dont_allowed_to_dislike_hide == true and $now_liked == false){
 
@@ -240,19 +237,31 @@ function hmLike()
 function allowed_to_see($id_member_started){
 	//checks if user is allowed to see this hide
 	// returns true if user is admin or user is poster
-
 	global $topicinfo;
-	if(we::$user['mod_cache']['id'] == $id_member_started){
-		return true;
-	}
-	if(we::$is['admin']){
+	if(MID == $id_member_started or we::$is['admin']){
 		return true;
 	}
 	return false;
 
 }
 
-	
+function get_post_author($id){
+	$req = wesql::query('
+		SELECT
+			id_msg, poster_time, id_member, body, smileys_enabled, poster_name, m.approved, m.data
+		FROM {db_prefix}messages AS m
+		INNER JOIN {db_prefix}topics AS t ON t.id_topic = m.id_topic AND {query_see_topic}
+		WHERE id_msg = {int:id_msg}',
+		array('id_msg' => $id)
+	);
+	$row = wesql::fetch_assoc($req);
+	wesql::free_result($req);
+
+	if (empty($row['id_msg']))
+		return false;
+	return $row['id_member'];
+}	
+
 
 function user_has_replied_to_topic($topicid){
 	// returns bool if currently logged in user has replied to $topicid
@@ -261,7 +270,7 @@ function user_has_replied_to_topic($topicid){
 				WHERE id_topic = {int:id_topic} 
 				and id_member = {int:id_user} LIMIT 1",	array(
 					'id_topic' => $topicid,
-					'id_user' => we::$user['mod_cache']['id']));
+					'id_user' => MID));
 	if(wesql::num_rows($query) > 0){
 		return true;
 	}
@@ -274,7 +283,7 @@ function user_has_liked_post($postid){
 	// returns bool if currently logged in user has liked post
 	$query = wesql::query('SELECT * FROM {db_prefix}likes WHERE id_content = {int:post_id} AND content_type = "post" AND id_member = {int:member_id}', 
 			array(
-				'member_id' => we::$user['mod_cache']['id'],
+				'member_id' => MID,
 				'post_id' => $postid,
 			)
 		);
@@ -293,7 +302,6 @@ function match_post_regex($postid, $regex){
 				WHERE id_msg = {int:id_post} LIMIT 1",	array(
 					'id_post' => $postid));
 	$result = wesql::fetch_assoc($query);
-	log_error($postid.":".$result['body']);
 	return preg_match($regex, $result['body']);
 
 }
