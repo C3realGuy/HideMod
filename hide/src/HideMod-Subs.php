@@ -3,13 +3,14 @@ if (!defined('WEDGE'))
 	die('Hacking attempt...');
 
 global $pattern_search_bbc, $pattern_search_hide, $pattern_search_hide_reply;
-$pattern_search_bbc = '/\[{}\](.*?)\[\/{}\]/'; //regex for bbcode
+$pattern_search_bbc = '/\[{}\]([\s\S]*)\[\/{}\]/'; //regex for bbcode
 $pattern_search_hide = str_replace("{}", "hide", $pattern_search_bbc);
 $pattern_search_hide_reply = str_replace("{}", "hide-reply", $pattern_search_bbc); //regex for hide-reply
 
 function hmLike()
 //Thats the "normal" like code from wedge, but a bit modified. Not a nice way but easiest.
 {
+	log_error("hallo");
 	global $topic, $context, $settings;
 	global $pattern_search_bbc, $pattern_search_hide; //HM: Some globals we need
 	loadSource('Like'); //HM: We only overwrite Like but we also need DisplayLike
@@ -95,7 +96,7 @@ function hmLike()
 
 	if (empty($id_content) || empty($content_type))
 		fatal_lang_error('no_access', false);
-	
+	log_error($id_content);
 	$contains_hide = match_post_regex($id_content, $pattern_search_hide);
 	// Does the current user already like said content?
 	$request = wesql::query('
@@ -219,7 +220,8 @@ function hmLike()
 		// Now the AJAXish data. We must be able to like it, otherwise we wouldn't be here!
 		loadTemplate('Msg');
 		loadPluginTemplate('CerealGuy:HideMod', 'src/HideMod');
-		log_error($now_liked);
+		log_error($now_liked." ".$contains_hide);
+		
 		if(isset($contains_hide) and $contains_hide == true and $dont_allowed_to_dislike_hide == true and $now_liked == false){
 
 
@@ -291,7 +293,7 @@ function match_post_regex($postid, $regex){
 				WHERE id_msg = {int:id_post} LIMIT 1",	array(
 					'id_post' => $postid));
 	$result = wesql::fetch_assoc($query);
-	//log_error($postid.":".$result['body']);
+	log_error($postid.":".$result['body']);
 	return preg_match($regex, $result['body']);
 
 }

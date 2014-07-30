@@ -3,7 +3,8 @@
 if (!defined('WEDGE'))
 	die('Hacking attempt...');
 
-function hmQuoteFastDone(&$xml, &$post_id, &$row){
+function hmQuoteFastDone(&$xml, &$row){
+	$post_id = $_REQUEST['quote'];
 	loadPluginSource('CerealGuy:HideMod', 'src/HideMod-Subs'); 
 	global $pattern_search_hide, $pattern_search_hide_reply, $settings;
 	if(we::$is['admin'] or we::$user['mod_cache']['id'] == $row['id_member']){
