@@ -24,21 +24,22 @@ function hmQuoteFastDone(&$xml, $row){
 function hmPostBBCParse(&$message, &$bbc_options, &$type){
 	loadPluginSource('CerealGuy:HideMod', 'src/HideMod-Subs'); 
 	global $context, $settings, $pattern_search_bbc, $pattern_search_hide, $pattern_search_hide_reply, $topicinfo, $topic, $board;
-	log_error(print_r($bbc_options, true));
+
 	$allowed_types = array('post', 'post-preview'); //perhaps interesting for tweaking at some day
 	$disabled_boards = !empty($settings['hidemod_disabled_boards']) ? unserialize($settings['hidemod_disabled_boards']) : array(); // nice line, modified from TopicSolved, prepares board settings from acp
 	if(!in_array($type, $allowed_types))
 		return;
 	
-	if(isset($bbc_options['print']) && $bbc_options['print'] == 1){
+	if(isset($bbc_options['print']) && $bbc_options['print'] == 1 && empty($bbc_options['cache'])){
 		// We dont know post id, therefore censor always.
 		$message = preg_replace($pattern_search_hide, $settings['hidemod_sa1'], $message);
 		$message = preg_replace($pattern_search_hide_reply, $settings['hidemod_sb1'],$message);
 		return;
 	}
+	$topic_id = $bbc_options['cache'];
 	$topic_id_first_msg = $topicinfo['id_first_msg'];
 	$topic_id_member_started = $topicinfo['id_member_started'];
-	$topic_id = $bbc_options['cache'];
+
 
 	if($topic_id_first_msg == $topic_id){
 		// It's the first post of a topic, therefore we already have the id_member_started info

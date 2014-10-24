@@ -16,7 +16,6 @@ function hmLike()
 	$dont_allowed_to_dislike_hide = true; //tweaking for debug, should normally be true
 	$contains_hide = false;
 
-	//log_error("w000t");
 	if (isset($_REQUEST['sa']) && $_REQUEST['sa'] == 'view')
 		return DisplayLike();
 
@@ -115,12 +114,9 @@ function hmLike()
 	if ($row = wesql::fetch_row($request))
 	{
 		//HM: Disable unlike if post contains [hide] bbc.
-		//log_error(match_post_regex($id_content, $pattern_search_hide));
-		//log_error($content_type);
 		$new_like = false;
 
 		if($content_type == 'post' and match_post_regex($id_content, $pattern_search_hide) and $dont_allowed_to_dislike_hide == true){
-			//log_error("heyyy");
 			// TODO Rewrite this... double code nix good code
 			$now_liked = false;
 			
