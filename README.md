@@ -1,9 +1,7 @@
-HideMod v1.0 (alpha)
+HideMod v1.0
 --------------------
-Hey there,
-thats my first plugin for wedge, im not very experienced with it till now, therefore i would be happy about
-some feedback :).
-
+This plugin adds the possibility to hide stuff from members.
+If the want to see it, they have to like (\[hide\]) the post or reply (\[hide-reply\]).
 
 Features:
 ---------
@@ -48,6 +46,5 @@ To-Do:
 ------
 - add some more settings & language
 - as soon as wedge adds a similar hook for quote_fast_done im going to rewrite the whole code
-- Plugin icon
 - Better Html
 - improve bbc parse code
