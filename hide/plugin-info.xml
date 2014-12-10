@@ -33,7 +33,6 @@
 
 
 	<hooks>
-		<function point="quote_fast_done" function="hmQuoteFastDone" filename="$plugindir/src/HideMod.Main" />
 		<function point="post_bbc_parse" function="hmPostBBCParse" filename="$plugindir/src/HideMod.Main" />
 		<function point="action_list" function="hmActionList" filename="$plugindir/src/HideMod.Main" />
 		

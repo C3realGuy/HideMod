@@ -1,0 +1,8 @@
+<file name="QuoteFast.php">
+	<operation>
+		<search position="before"><![CDATA[return_xml('<we><quote>', cleanXml($xml), '</quote></we>');]]></search>
+		<add><![CDATA[loadPluginSource('CerealGuy:HideMod', 'src/HideMod.Main');
+	$xml = hmQuoteFastDone($xml, $row);
+]]></add>
+	</operation>
+</file>
