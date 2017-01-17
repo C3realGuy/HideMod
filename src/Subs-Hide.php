@@ -1,0 +1,31 @@
+<?php
+
+function userHasRepliedToTopic($user_id, $topic_id) {
+  $query = wesql::query('SELECT 1 FROM {db_prefix}messages
+                         WHERE id_topic = {int:id_topic}
+                         AND id_member = {int:id_user} LIMIT 1',
+                        array('id_user' => $user_id,
+                              'id_topic' => $topic_id));
+  $row = wesql::fetch_row($query)[0];
+  if($row == '1') return true;
+  return false;
+}
+
+function userHasLikedPost($user_id, $post_id) {
+  $query = wesql::query('SELECT 1 FROM {db_prefix}likes
+                         WHERE id_content = {int:id_post}
+                         AND content_type = "post"
+                         AND id_member = {int:id_user} LIMIT 1',
+                        array('id_post' => $post_id,
+                              'id_user' => $user_id));
+  $row = wesql::fetch_row($query)[0];
+  if($row == '1') return true;
+  return false;
+}
+
+function getPostId() {
+  global $bbc_options, $bbc_type;
+  // If we're lucky, bbc_options['cache'] tells us the post id
+  if(isset($bbc_options['cache'])) return $bbc_options['cache'];
+  return false;
+}

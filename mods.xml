@@ -1,0 +1,8 @@
+<file name="Subs-BBC.php">
+  <operation>
+    <search position="after">global $txt, $context, $settings, $user_profile;</search>
+    <add>
+  $GLOBALS['bbc_options'] = $bbc_options; // We need this to figure out the post id
+  $GLOBALS['bbc_type'] = $type;</add>
+  </operation>
+</file>
