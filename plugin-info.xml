@@ -1,5 +1,5 @@
 <?xml version="1.0" standalone="yes" ?>
-<plugin id="CerealGuy:HideModv2">
+<plugin id="CerealGuy:Hide">
 	<name>HideModv2</name>
 	<author>CerealGuy</author>
 	<description>Enable [hide] and [hide-reply] bbcodes.</description>
@@ -11,8 +11,8 @@
 		<setting name="hidemod_hide_reply_locked" default="&lt;center&gt;Hidden Content:&lt;br&gt;Reply to see content&lt;/center&gt;" /> <!-- locked hide-reply -->
 		<setting name="hidemod_hide_reply_unlocked_before" default="&lt;center&gt;unHidden Content:&lt;/center&gt;" /> <!-- unlocked hide-reply before -->
 		<setting name="hidemod_hide_reply_unlocked_after" default="" /> <!-- unlocked hide-reply after -->
-		<setting name="hidemod_sc1" default="*** HIDDEN CONTENT LIKE TO SEE IT ***" /> <!-- quote like msg -->
-		<setting name="hidemod_sc2" default="*** HIDDEN CONTENT REPLY TO SEE IT ***" /> <!-- quote reply msg -->
+		<setting name="hidemod_hide_locked_quote" default="*** HIDDEN CONTENT LIKE TO SEE IT ***" /> <!-- quote like msg -->
+		<setting name="hidemod_hide_reply_locked_quote" default="*** HIDDEN CONTENT REPLY TO SEE IT ***" /> <!-- quote reply msg -->
 		<!--<setting name="hidemod_disabled_boards" default="" />-->
 	</settings>
 	<settings-page area="hidemod">
@@ -25,8 +25,8 @@
 		<text name="hidemod_hide_reply_unlocked_before" />
 		<text name="hidemod_hide_reply_unlocked_after" />
 		<hr />
-		<text name="hidemod_sc1" />
-		<text name="hidemod_sc2" />
+		<text name="hidemod_hide_locked_quote" />
+		<text name="hidemod_hide_reply_locked_quote" />
 		<hr />
 		<!--<boards name="hidemod_disabled_boards" />-->
 	</settings-page>
@@ -34,11 +34,11 @@
   <bbcodes>
     <bbcode tag="hide" type="unparsed_content" block-level="no">
       <content>HIDDEN CONTENT: Like to see</content>
-      <validate-func>loadPluginSource('CerealGuy:HideModv2', 'src/Hide'); validate_hide_bbc($tag, $data, $disabled);</validate-func>
+      <validate-func>loadPluginSource('CerealGuy:Hide', 'src/Hide'); validate_hide_bbc($tag, $data, $disabled);</validate-func>
     </bbcode>
     <bbcode tag="hide-reply" type="unparsed_content" block-level="no">
       <content>HIDDEN CONTENT: Reply to see</content>
-      <validate-func>loadPluginSource('CerealGuy:HideModv2', 'src/Hide'); validate_hide_reply_bbc($tag, $data, $disabled);</validate-func>
+      <validate-func>loadPluginSource('CerealGuy:Hide', 'src/Hide'); validate_hide_reply_bbc($tag, $data, $disabled);</validate-func>
     </bbcode>
   </bbcodes>
 </plugin>

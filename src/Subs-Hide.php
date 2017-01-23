@@ -27,5 +27,20 @@ function getPostId() {
   global $bbc_options, $bbc_type;
   // If we're lucky, bbc_options['cache'] tells us the post id
   if(isset($bbc_options['cache'])) return $bbc_options['cache'];
+  if($bbc_type == 'quote') return (int) $_REQUEST['quote'];
+  log_error('Couldn\'t get Post Id!');
+  return false;
+}
+
+function getTopicId() {
+  global $bbc_options, $bbc_type, $topic;
+  if(!empty($topic)) return $topic;
+  if($bbc_type == 'quote') {
+    $postId = getPostId();
+    $query = wesql::query('SELECT id_topic FROM {db_prefix}messages WHERE id_msg = {int:id_post}', array('id_post' => $postId));
+    $row = wesql::fetch_row($query)[0];
+    return (int) $row;
+  }
+  log_error('Couldn\'t get Topic Id!');
   return false;
 }

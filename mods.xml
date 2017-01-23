@@ -6,3 +6,11 @@
   $GLOBALS['bbc_type'] = $type;</add>
   </operation>
 </file>
+<file name="QuoteFast.php">
+	<operation>
+		<search position="after">$row['body'] = preg_replace('~<br\s*/?\>~i', "\n", $row['body']);</search>
+		<add>
+    loadPluginSource('CerealGuy:Hide', 'src/Hide');
+	  $xml = hide_quote($row);</add>
+	</operation>
+</file>
