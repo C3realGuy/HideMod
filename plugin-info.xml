@@ -31,6 +31,14 @@
 		<!--<boards name="hidemod_disabled_boards" />-->
 	</settings-page>
 	<acp-url>action=admin;area=hidemod</acp-url>
+	<newperms filename="lang/Hide-Permissions">
+		<groups>
+			<group type="membergroup" name="hide_group" />
+		</groups>
+		<permissionlist>
+			<permission type="membergroup" name="hide_see_through" ownany="false" group="hide_group"/>
+		</permissionlist>
+	</newperms>
   <bbcodes>
     <bbcode tag="hide" type="unparsed_content" block-level="no">
       <content>HIDDEN CONTENT: Like to see</content>

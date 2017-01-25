@@ -9,24 +9,28 @@ function validate_hide_bbc(&$tag, &$data, &$disabled) {
   global $settings, $bbc_options, $bbc_type;
 
   // Maybe we already checked this post? (multiple hides)
-  $hasLiked = (isset($bbc_options['has_liked']) && $bbc_options['has_liked'] == true) ? true : null;
+  $showHide = (isset($bbc_options['show_hide_like']) && $bbc_options['show_hide_like'] == true) ? true : null;
+
+  if(allowedTo('hide_see_through')) {
+    $showHide = true;
+  }
 
   // If we don't know, check for it!
-  if($hasLiked === null) {
+  if($showHide === null) {
     $postId = getPostId(); // get post id
 
     // if we can't get post id, we better don't show stuff
     if($postId == false) {
-      $hasliked = false;
+      $showHide = false;
     }else {
-      // now check if current user liked this post
-      $hasLiked = userHasLikedPost(MID, $postId);
-
-      // and save it to bbc_options so we don't have to do this again
-      $bbc_options['has_liked'] = $hasLiked;
+      log_error($postId.' '.(userOwnsPost(MID, $postId) ? 'true' : 'false'));
+      // now check if user owns post or current user liked this post
+      $showHide = userOwnsPost(MID, $postId) || userHasLikedPost(MID, $postId);
     }
   }
-  $showHide = $hasLiked;
+
+  // and save it to bbc_options so we don't have to do this again
+  $bbc_options['show_hide_like'] = $showHide;
 
   if($showHide) {
     if($bbc_type != 'quote') {
@@ -52,20 +56,23 @@ function validate_hide_reply_bbc(&$tag, &$data, &$disabled) {
   global $settings, $topic, $topicinfo, $bbc_options, $bbc_type;
   log_error($bbc_type);
   // Maybe we already checked this post? (multiple hides)
-  $hasReplied = (isset($topicinfo['has_replied']) && $topicinfo['has_replied'] == true) ? true : null;
+  $showHide = (isset($topicinfo['show_hide_reply']) && $topicinfo['show_hide_reply'] == true) ? true : null;
 
-  if($hasReplied === null) {
+  if(allowedTo('hide_see_through')) {
+    $showHide = true;
+  }
+
+  if($showHide === null) {
     $topic = getTopicId();
     if($topic == false) {
       // We couldn't get topic id, so we better hide stuff
-      $hasReplied = false;
+      $showHide = false;
     }else {
-      $hasReplied = userHasRepliedToTopic(MID, $topic);
-      $topicinfo['has_replied'] = $hasReplied;
+      $showHide = userOwnsPost(MID, $postId) || userHasRepliedToTopic(MID, $topic);
     }
   }
 
-  $showHide = $hasReplied;
+  $bbc_options['show_hide_reply'] = $showHide;
 
   if($showHide) {
     if($bbc_type != 'quote') {

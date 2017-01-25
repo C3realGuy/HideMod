@@ -1,14 +1,10 @@
 <?php
 
-function userHasRepliedToTopic($user_id, $topic_id) {
-  $query = wesql::query('SELECT 1 FROM {db_prefix}messages
-                         WHERE id_topic = {int:id_topic}
-                         AND id_member = {int:id_user} LIMIT 1',
-                        array('id_user' => $user_id,
-                              'id_topic' => $topic_id));
-  $row = wesql::fetch_row($query)[0];
-  if($row == '1') return true;
-  return false;
+function userOwnsPost($user_id, $post_id) {
+  $query = wesql::query('SELECT 1 FROM {db_prefix}messages WHERE id_msg={int:id_post} AND id_member={int:id_user} LIMIT 1',
+                        array('id_post' => $post_id,
+                              'id_user' => $user_id));
+  return wesql::fetch_row($query)[0] == '1';
 }
 
 function userHasLikedPost($user_id, $post_id) {
@@ -18,9 +14,16 @@ function userHasLikedPost($user_id, $post_id) {
                          AND id_member = {int:id_user} LIMIT 1',
                         array('id_post' => $post_id,
                               'id_user' => $user_id));
-  $row = wesql::fetch_row($query)[0];
-  if($row == '1') return true;
-  return false;
+  return wesql::fetch_row($query)[0] == '1';
+}
+
+function userHasRepliedToTopic($user_id, $topic_id) {
+  $query = wesql::query('SELECT 1 FROM {db_prefix}messages
+                         WHERE id_topic = {int:id_topic}
+                         AND id_member = {int:id_user} LIMIT 1',
+                        array('id_user' => $user_id,
+                              'id_topic' => $topic_id));
+  return wesql::fetch_row($query)[0] == '1';
 }
 
 function getPostId() {
