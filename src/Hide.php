@@ -87,12 +87,13 @@ function bbc_validate_hide_reply_bbc(&$tag, &$content, &$disabled, &$params) {
             $tag['content'] = isset($settings['hidemod_hide_reply_unlocked_before']) ? translate_lang_strings($settings['hidemod_hide_reply_unlocked_before']) : 'DEFAULT HIDE-REPLY UNLOCKED BEFORE:<br>';
             $tag['content'] .= parse_bbc($content, $bbc_type, $bbc_options);
             $tag['content'] .= isset($settings['hidemod_hide_reply_unlocked_after']) ? translate_lang_strings($settings['hidemod_hide_reply_unlocked_after']) : '';
+
         } else{
             $tag['content'] = '[hide-reply]' . parse_bbc_quote($content) . '[/hide-reply]';
         }
     } else {
         if($bbc_type != 'quote') {
-            $tag['content'] = $settings['hidemod_hide_reply_locked'];
+            $tag['content'] = translate_lang_strings($settings['hidemod_hide_reply_locked']);
         } else {
             $tag['content'] = '[hide-reply]';
             $tag['content'] .= isset($settings['hidemod_hide_reply_locked_quote']) ? translate_lang_strings($settings['hidemod_hide_reply_locked_quote']) : '*** DEFAULT HIDDEN CONTENT: REPLY TO SEE ***';

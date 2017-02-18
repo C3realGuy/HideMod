@@ -7,12 +7,12 @@
 	<settings>
 		<setting name="hidemod_hide_locked" default="&lt;div class=&quot;bbc_hide bbc_hide_closed&quot;&gt;&lt;div class=&quot;bbc_hide_header&quot;&gt;{{hide_hidden_content}}&lt;/div&gt;&lt;div class=&quot;bbc_hide_content&quot;&gt;{{hide_like_to_see}}&lt;/div&gt;&lt;/div&gt;" /> <!-- locked hide -->
 		<setting name="hidemod_hide_unlocked_before" default="&lt;div class=&quot;bbc_hide bbc_hide_open&quot;&gt;&lt;div class=&quot;bbc_hide_header&quot;&gt;{{hide_hidden_content}}&lt;/div&gt;&lt;div class=&quot;bbc_hide_content&quot;&gt;" /> <!-- unlocked hide before -->
-		<setting name="hidemod_hide_unlocked_after" default="" /> <!-- unlocked hide after -->
-		<setting name="hidemod_hide_reply_locked" default="&lt;center&gt;Hidden Content:&lt;br&gt;Reply to see content&lt;/center&gt;" /> <!-- locked hide-reply -->
-		<setting name="hidemod_hide_reply_unlocked_before" default="&lt;center&gt;unHidden Content:&lt;/center&gt;" /> <!-- unlocked hide-reply before -->
-		<setting name="hidemod_hide_reply_unlocked_after" default="" /> <!-- unlocked hide-reply after -->
-		<setting name="hidemod_hide_locked_quote" default="*** HIDDEN CONTENT LIKE TO SEE IT ***" /> <!-- quote like msg -->
-		<setting name="hidemod_hide_reply_locked_quote" default="*** HIDDEN CONTENT REPLY TO SEE IT ***" /> <!-- quote reply msg -->
+		<setting name="hidemod_hide_unlocked_after" default="&lt;/div&gt;&lt;/div&gt;" /> <!-- unlocked hide after -->
+		<setting name="hidemod_hide_reply_locked" default="&lt;div class=&quot;bbc_hide bbc_hide_closed&quot;&gt;&lt;div class=&quot;bbc_hide_header&quot;&gt;{{hide_hidden_content}}&lt;/div&gt;&lt;div class=&quot;bbc_hide_content&quot;&gt;{{hide_reply_to_see}}&lt;/div&gt;&lt;/div&gt;" /> <!-- locked hide-reply -->
+		<setting name="hidemod_hide_reply_unlocked_before" default="&lt;div class=&quot;bbc_hide bbc_hide_open&quot;&gt;&lt;div class=&quot;bbc_hide_header&quot;&gt;{{hide_hidden_content}}&lt;/div&gt;&lt;div class=&quot;bbc_hide_content&quot;&gt;" /> <!-- unlocked hide-reply before -->
+		<setting name="hidemod_hide_reply_unlocked_after" default="&lt;/div&gt;&lt;/div&gt;" /> <!-- unlocked hide-reply after -->
+		<setting name="hidemod_hide_locked_quote" default="{{hide_quote_like_to_see}}" /> <!-- quote like msg -->
+		<setting name="hidemod_hide_reply_locked_quote" default="{{hide_quote_reply_to_see}}" /> <!-- quote reply msg -->
 		<!--<setting name="hidemod_disabled_boards" default="" />-->
 	</settings>
 	<settings-page area="hidemod">
