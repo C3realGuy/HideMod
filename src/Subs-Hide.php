@@ -47,3 +47,7 @@ function getTopicId() {
   log_error('Couldn\'t get Topic Id!');
   return false;
 }
+
+function translate_lang_strings($str) {
+    return preg_replace_callback('~{{(\w+)}}~', 'parse_lang_strings', $str);
+}
