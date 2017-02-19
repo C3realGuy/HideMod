@@ -1,36 +1,38 @@
 <?xml version="1.0" standalone="yes" ?>
 <plugin id="CerealGuy:Hide">
-	<name>HideModv2</name>
+	<name>Hide</name>
 	<author>CerealGuy</author>
-	<description>Enable [hide] and [hide-reply] bbcodes.</description>
+	<description>Adds [hide] and [hide-reply] bbcodes.</description>
 	<version>2.0</version>
 	<settings>
-		<setting name="hidemod_hide_locked" default="&lt;div class=&quot;bbc_hide bbc_hide_closed&quot;&gt;&lt;div class=&quot;bbc_hide_header&quot;&gt;{{hide_hidden_content}}&lt;/div&gt;&lt;div class=&quot;bbc_hide_content&quot;&gt;{{hide_like_to_see}}&lt;/div&gt;&lt;/div&gt;" /> <!-- locked hide -->
-		<setting name="hidemod_hide_unlocked_before" default="&lt;div class=&quot;bbc_hide bbc_hide_open&quot;&gt;&lt;div class=&quot;bbc_hide_header&quot;&gt;{{hide_hidden_content}}&lt;/div&gt;&lt;div class=&quot;bbc_hide_content&quot;&gt;" /> <!-- unlocked hide before -->
-		<setting name="hidemod_hide_unlocked_after" default="&lt;/div&gt;&lt;/div&gt;" /> <!-- unlocked hide after -->
-		<setting name="hidemod_hide_reply_locked" default="&lt;div class=&quot;bbc_hide bbc_hide_closed&quot;&gt;&lt;div class=&quot;bbc_hide_header&quot;&gt;{{hide_hidden_content}}&lt;/div&gt;&lt;div class=&quot;bbc_hide_content&quot;&gt;{{hide_reply_to_see}}&lt;/div&gt;&lt;/div&gt;" /> <!-- locked hide-reply -->
-		<setting name="hidemod_hide_reply_unlocked_before" default="&lt;div class=&quot;bbc_hide bbc_hide_open&quot;&gt;&lt;div class=&quot;bbc_hide_header&quot;&gt;{{hide_hidden_content}}&lt;/div&gt;&lt;div class=&quot;bbc_hide_content&quot;&gt;" /> <!-- unlocked hide-reply before -->
-		<setting name="hidemod_hide_reply_unlocked_after" default="&lt;/div&gt;&lt;/div&gt;" /> <!-- unlocked hide-reply after -->
-		<setting name="hidemod_hide_locked_quote" default="{{hide_quote_like_to_see}}" /> <!-- quote like msg -->
-		<setting name="hidemod_hide_reply_locked_quote" default="{{hide_quote_reply_to_see}}" /> <!-- quote reply msg -->
-		<!--<setting name="hidemod_disabled_boards" default="" />-->
+		<setting name="hide_hide_locked" default="&lt;div class=&quot;bbc_hide bbc_hide_closed&quot;&gt;&lt;div class=&quot;bbc_hide_header&quot;&gt;{{hide_hidden_content}}&lt;/div&gt;&lt;div class=&quot;bbc_hide_content&quot;&gt;{{hide_like_to_see}}&lt;/div&gt;&lt;/div&gt;" /> <!-- locked hide -->
+		<setting name="hide_hide_unlocked_before" default="&lt;div class=&quot;bbc_hide bbc_hide_open&quot;&gt;&lt;div class=&quot;bbc_hide_header&quot;&gt;{{hide_hidden_content}}&lt;/div&gt;&lt;div class=&quot;bbc_hide_content&quot;&gt;" /> <!-- unlocked hide before -->
+		<setting name="hide_hide_unlocked_after" default="&lt;/div&gt;&lt;/div&gt;" /> <!-- unlocked hide after -->
+        <setting name="hide_hide_locked_quote" default="{{hide_quote_like_to_see}}" /> <!-- quote like msg -->
+
+		<setting name="hide_hide_reply_locked" default="&lt;div class=&quot;bbc_hide bbc_hide_closed&quot;&gt;&lt;div class=&quot;bbc_hide_header&quot;&gt;{{hide_hidden_content}}&lt;/div&gt;&lt;div class=&quot;bbc_hide_content&quot;&gt;{{hide_reply_to_see}}&lt;/div&gt;&lt;/div&gt;" /> <!-- locked hide-reply -->
+		<setting name="hide_hide_reply_unlocked_before" default="&lt;div class=&quot;bbc_hide bbc_hide_open&quot;&gt;&lt;div class=&quot;bbc_hide_header&quot;&gt;{{hide_hidden_content}}&lt;/div&gt;&lt;div class=&quot;bbc_hide_content&quot;&gt;" /> <!-- unlocked hide-reply before -->
+		<setting name="hide_hide_reply_unlocked_after" default="&lt;/div&gt;&lt;/div&gt;" /> <!-- unlocked hide-reply after -->
+		<setting name="hide_hide_reply_locked_quote" default="{{hide_quote_reply_to_see}}" /> <!-- quote reply msg -->
+
+		<setting name="hide_disabled_boards" default="" />
 	</settings>
-	<settings-page area="hidemod">
+	<settings-page area="hide">
 		<language file="lang/ManageHide" />
-		<text name="hidemod_hide_locked" />
-		<text name="hidemod_hide_unlocked_before" />
-		<text name="hidemod_hide_unlocked_after" />
-		<hr />
-		<text name="hidemod_hide_reply_locked" />
-		<text name="hidemod_hide_reply_unlocked_before" />
-		<text name="hidemod_hide_reply_unlocked_after" />
-		<hr />
-		<text name="hidemod_hide_locked_quote" />
-		<text name="hidemod_hide_reply_locked_quote" />
-		<hr />
-		<!--<boards name="hidemod_disabled_boards" />-->
+        <title name="hide_hide" />
+		<large_text name="hide_hide_locked" />
+		<large_text name="hide_hide_unlocked_before" />
+		<large_text name="hide_hide_unlocked_after" />
+        <text name="hide_hide_locked_quote" />
+        <title name="hide_hide_reply" />
+        <large_text name="hide_hide_reply_locked" />
+		<large_text name="hide_hide_reply_unlocked_before" />
+		<large_text name="hide_hide_reply_unlocked_after" />
+        <text name="hide_hide_reply_locked_quote" />
+        <hr />
+		<boards name="hide_disabled_boards" />
 	</settings-page>
-	<acp-url>action=admin;area=hidemod</acp-url>
+	<acp-url>action=admin;area=hide</acp-url>
 	<newperms filename="lang/Hide-Permissions">
 		<groups>
 			<group type="membergroup" name="hide_group" />
