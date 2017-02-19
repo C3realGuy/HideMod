@@ -11,6 +11,15 @@ This is the Version 2.0 of the Hide Plugin for [Wedge](http://github.com/wedge/w
 * Fully localized (currently english & german translation is available, PR are welcome)
 * Permission to look through hide
 
+### Pictures
+
+![Open Hide](https://raw.githubusercontent.com/C3realGuy/Wedge-Hide/master/pictures/hide_open.png)
+
+![Closed Hide](https://raw.githubusercontent.com/C3realGuy/Wedge-Hide/master/pictures/hide_closed.png)
+
+![Closed Hide](https://raw.githubusercontent.com/C3realGuy/Wedge-Hide/master/pictures/plugin_settings.png)
+
+
 ### How to install?
 1. Drop the hide folder into your plugins folder
 2. Activate it over the Admin Area in wedge
