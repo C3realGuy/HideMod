@@ -7,6 +7,8 @@ This is the Version 2.0 of the Hide Plugin for [Wedge](http://github.com/wedge/w
 * Adds `[hide-reply]`. Same as with `[hide]` but people have to reply to see the content.
 * Adds Buttons for both BBC into the Editor.
 * You can't look through the hide (if you're not allowed to) with quotes/search/print page whatever
+* Normal members can't dislike posts containing a `[hide]`
+* Posts get automatically refreshed if you like them and they contain a `[hide]`
 * You have full control over the HTML around the hide tags so you can change the look how you want
 * Fully localized (currently english & german translation is available, PR are welcome)
 * Permission to look through hide
