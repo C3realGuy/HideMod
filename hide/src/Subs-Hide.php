@@ -51,3 +51,18 @@ function getTopicId() {
 function translate_lang_strings($str) {
     return preg_replace_callback('~{{(\w+)}}~', 'parse_lang_strings', $str);
 }
+
+// Check if a message contains a hide tag which is not between code tags
+function containsHide($message, $hide_bbc = '[hide]') {
+    // First check if we even have a [hide] in our message, if not
+    // we can directly return false.
+    if(strpos($message, $hide_bbc) === false)
+        return false;
+
+    // if we have no code tag in our message, directly return true
+    if(strpos($message, '[code') === false)
+        return true;
+
+    // okay we have a hide and maybe a code, strip out anything between [code=?.*]...[/code]
+    return strpos(preg_replace('/(\[code(=.*?)?\](.*?)((\[\/code\])|$))/s', '', $message), $hide_bbc) !== false;
+}

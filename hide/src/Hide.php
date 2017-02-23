@@ -28,6 +28,7 @@ function bbc_validate_hide_bbc(&$tag, &$content, &$disabled, &$params) {
     if($showHide === null && we::$is_guest === false) {
         $postId = getPostId(); // get post id
 
+        log_error($postId);
         // if we can't get post id, we better don't show stuff
         if($postId == false) {
             $showHide = false;
@@ -72,7 +73,8 @@ function bbc_validate_hide_reply_bbc(&$tag, &$content, &$disabled, &$params) {
 
     if($showHide === null && we::$is_guest === false) {
         $topic = getTopicId();
-        if($topic == false) {
+        $postId = getPostId(); // get post id
+        if($topic == false || $postId == false) {
             // We couldn't get topic id, so we better hide stuff
             $showHide = false;
         }else {

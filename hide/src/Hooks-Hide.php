@@ -36,3 +36,7 @@ function hide_bbc_buttons(&$bbc) {
     file_put_contents('/tmp/test', var_export($bbc, true));
 
 }
+
+function hide_display_main() {
+    add_plugin_js_file('CerealGuy:Hide', 'js/like.js');
+}

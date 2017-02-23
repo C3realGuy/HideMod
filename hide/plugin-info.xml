@@ -43,6 +43,7 @@
 	</newperms>
     <hooks>
         <function point="bbc_buttons" function="hide_bbc_buttons" filename="$plugindir/src/Hooks-Hide" />
+        <function point="display_main" function="hide_display_main" filename="$plugindir/src/Hooks-Hide" />
     </hooks>
     <bbcodes>
         <bbcode tag="hide" type="unparsed_content" block-level="no">

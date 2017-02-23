@@ -2,15 +2,105 @@
   <operation>
     <search position="after">global $txt, $context, $settings, $user_profile;</search>
     <add>
-  $GLOBALS['bbc_options'] = $bbc_options; // We need this to figure out the post id
+  //Hide: We need this to figure out the post id
+  $GLOBALS['bbc_options'] = $bbc_options;
   $GLOBALS['bbc_type'] = $type;</add>
   </operation>
 </file>
+
 <file name="QuoteFast.php">
 	<operation>
 		<search position="after">$row['body'] = preg_replace('~<br\s*/?\>~i', "\n", $row['body']);</search>
 		<add>
+    //Hide: We have to protect quotes so that you can't cheat
     loadPluginSource('CerealGuy:Hide', 'src/Hide');
 	  $xml = hide_quote($row);</add>
 	</operation>
+</file>
+
+<file name="Like.php">
+    <operation>
+        <search position="before">// We might be doing a topic.</search>
+        <add>
+    $context['hide_like'] = ['can_dislike' => true, 'error' => false, 'body' => false]; // Hide
+    </add>
+    </operation>
+    <operation>
+        <search position="replace">SELECT id_topic, id_member, subject</search>
+        <add>SELECT id_topic, id_member, subject, body</add> <!-- We want to know the body too -->
+    </operation>
+    <operation>
+        <search position="replace">list ($id_topic, $id_author, $subject)</search>
+        <add>list ($id_topic, $id_author, $subject, $body)</add>
+    </operation>
+    <operation>
+        <search position="before">$like_time = time();</search>
+        <add>
+    // Hide: Check if we contain a valid [hide] tag
+    loadPluginSource('CerealGuy:Hide', 'src/Subs-Hide');
+    $contains_hide = containsHide($body);
+
+    $hide_force_allow_dislike = allowedTo('hide_see_through');
+    $now_liked = $is_liked = wesql::num_rows($request) != 0; // Hide
+
+    if($is_liked && $contains_hide && !$hide_force_allow_dislike) {
+        global $txt;
+        loadPluginLanguage('CerealGuy:Hide', 'lang/Hide-Like');
+        $context['hide_like']['can_dislike'] = false;
+        $context['hide_like']['error'] = $txt['hide_error_cant_dislike'];
+    }
+
+    // Hide: If post isn't liked and we can't see through, we want to reload the post content,
+    // so we need to send a post later in ajax
+    if(!$is_liked && $contains_hide && $id_author !== MID && !allowedTo('hide_see_through')) {
+        loadSource('Subs-BBC');
+        $context['hide_like']['body'] = parse_bbc($body, 'post', ['show_hide_like' => true]);
+    }
+
+    </add>
+    </operation>
+    <operation>
+        <search position="replace">if ($row = wesql::fetch_row($request))</search>
+        <add>if ((!$contains_hide || $hide_force_allow_dislike) && $row = wesql::fetch_row($request)) // Hide: Only dislike if it doesn't contain a hide or we are special permissions</add>
+    </operation>
+    <operation>
+        <search position="replace">$now_liked = false;
+	}
+	else</search>
+        <add>$now_liked = false;
+	}
+	elseif($is_liked === false)</add>
+    </operation>
+</file>
+
+<file name="Msg.template.php">
+    <operation>
+        <search position="after">		$num_likes = 0;</search>
+        <add>
+
+    if(!isset($context['hide_like']))
+        log_error('Missing my $context[\'hide_like\']!');
+    else
+        $can_like = $you_like ? $context['hide_like']['can_dislike'] : $can_like;
+    ob_start(); // Hide
+    </add>
+    </operation>
+    <operation>
+        <search positon="after">echo '
+							</div>';</search>
+    <add>
+    $like_html = ob_get_contents(); // Hide
+    ob_end_clean(); // Hide
+    if(AJAX) {
+        $json = [
+            'like_html' => $like_html,
+            'error' => $context['hide_like']['error'],
+            'body' => $context['hide_like']['body'],
+        ];
+        echo JSON_ENCODE($json);
+    } else {
+        echo $like_html;
+    }
+    </add>
+    </operation>
 </file>
