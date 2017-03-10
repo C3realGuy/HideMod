@@ -7,7 +7,7 @@
  * @return       [type]                       [description]
  */
 function hide_bbc_buttons(&$bbc) {
-    global $txt;
+    global $context, $txt;
     loadPluginLanguage('CerealGuy:Hide', 'lang/Hide-Editor');
 
     array_splice(
@@ -16,7 +16,7 @@ function hide_bbc_buttons(&$bbc) {
         0,
         [
             [
-                'image' => 'http://localhost:8080/plugins/hide2/assets/bbc_hide.png',
+                'image' => $context['plugins_url']['CerealGuy:Hide'] . '/assets/bbc_hide.png',
             	'code' => 'hide',
             	'before' => '[hide]',
                 'after' => '[/hide]',
@@ -24,7 +24,7 @@ function hide_bbc_buttons(&$bbc) {
 
             ],
             [
-                'image' => 'http://localhost:8080/plugins/hide2/assets/bbc_hide_reply.png',
+                'image' => $context['plugins_url']['CerealGuy:Hide'] . '/assets/bbc_hide_reply.png',
     			'code' => 'hide-reply',
     			'before' => '[hide-reply]',
                 'after' => '[/hide-reply]',
