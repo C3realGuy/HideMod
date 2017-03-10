@@ -40,13 +40,14 @@
     loadPluginSource('CerealGuy:Hide', 'src/Subs-Hide');
     $contains_hide = containsHide($body);
 
-    $hide_force_allow_dislike = allowedTo('hide_see_through');
+    $allowed_hide_see_through = allowedTo('hide_see_through');
     $now_liked = $is_liked = wesql::num_rows($request) != 0; // Hide
 
-    if($is_liked && $contains_hide && !$hide_force_allow_dislike) {
+    $context['hide_like']['can_dislike'] = $allowed_hide_see_through || !$contains_hide;
+
+    if($is_liked && $contains_hide && !$allowed_hide_see_through) {
         global $txt;
         loadPluginLanguage('CerealGuy:Hide', 'lang/Hide-Like');
-        $context['hide_like']['can_dislike'] = false;
         $context['hide_like']['error'] = $txt['hide_error_cant_dislike'];
     }
 
@@ -61,7 +62,7 @@
     </operation>
     <operation>
         <search position="replace">if ($row = wesql::fetch_row($request))</search>
-        <add>if ((!$contains_hide || $hide_force_allow_dislike) && $row = wesql::fetch_row($request)) // Hide: Only dislike if it doesn't contain a hide or we are special permissions</add>
+        <add>if ((!$contains_hide || $allowed_hide_see_through) && $row = wesql::fetch_row($request)) // Hide: Only dislike if it doesn't contain a hide or we are special permissions</add>
     </operation>
     <operation>
         <search position="replace">$now_liked = false;
