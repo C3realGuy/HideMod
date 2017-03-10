@@ -40,3 +40,10 @@ function hide_bbc_buttons(&$bbc) {
 function hide_display_main() {
     add_plugin_js_file('CerealGuy:Hide', 'js/like.js');
 }
+
+function hide_display_prepare_post($counter, $message) {
+    global $context;
+    loadPluginSource('CerealGuy:Hide', 'src/Subs-Hide');
+    $context['hide_like'] = ['can_dislike' => allowedTo('hide_see_through') || !containsHide($message['body']), 'error' => false, 'body' => false]; // Hide
+
+}
