@@ -28,7 +28,9 @@ This is the Version 2.0 of the Hide Plugin for [Wedge](http://github.com/wedge/w
 3. Customize it if you feel so
 
 ### ToDo:
-1. Automaticall reload posts containing [hide] when someone likes the post who cannot see the content yet.
+1. _Currently nothing_
+
+You want to see any feature in this plugin? Feel free to open a feature issue.
 
 ### License (MIT)
 
