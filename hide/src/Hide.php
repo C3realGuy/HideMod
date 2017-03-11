@@ -4,7 +4,6 @@ loadPluginSource('CerealGuy:Hide', 'src/Subs-Hide');
 loadPluginLanguage('CerealGuy:Hide', 'lang/Hide-BBC');
 add_plugin_css_file('CerealGuy:Hide', 'css/hide', true);
 
-
 /**
  * This function gets executed from Subs-BBC. It's kind of a hack because
  * we misuse the validate feature of BBCodes in wedge. But it works and we
@@ -14,7 +13,7 @@ add_plugin_css_file('CerealGuy:Hide', 'css/hide', true);
  * @param                [type]                                    $disabled [description]
  * @return             [type]                                                        [description]
  */
-function bbc_validate_hide_bbc(&$tag, &$content, &$disabled, &$params) {
+function bbc_validate_hide_bbc(&$tag, &$content, &$disabled) {
     global $settings, $bbc_options, $bbc_type;
 
     // Maybe we already checked this post? (multiple hides)
@@ -61,7 +60,7 @@ function bbc_validate_hide_bbc(&$tag, &$content, &$disabled, &$params) {
 }
 
 // Same as with validate_hide_bbc
-function bbc_validate_hide_reply_bbc(&$tag, &$content, &$disabled, &$params) {
+function bbc_validate_hide_reply_bbc(&$tag, &$content, &$disabled) {
     global $settings, $topic, $topicinfo, $bbc_options, $bbc_type;
     // Maybe we already checked this post? (multiple hides)
     $showHide = (isset($topicinfo['show_hide_reply']) && $topicinfo['show_hide_reply'] == true) ? true : null;
