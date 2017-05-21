@@ -20,7 +20,7 @@ function bbc_validate_hide_bbc(&$tag, &$content, &$disabled) {
     $showHide = (isset($bbc_options['show_hide_like']) && $bbc_options['show_hide_like'] == true) ? true : null;
 
     // if we just create a new post, we won't have a postid yet, so set $showHide to true
-    if($_GET['action'] == 'post2') $showHide = true;
+    if(isset($_GET['action']) && $_GET['action'] == 'post2') $showHide = true;
 
     if (allowedTo('hide_see_through')) {
         $showHide = true;
@@ -69,7 +69,7 @@ function bbc_validate_hide_reply_bbc(&$tag, &$content, &$disabled) {
     $showHide = (isset($topicinfo['show_hide_reply']) && $topicinfo['show_hide_reply'] == true) ? true : null;
 
     // if we just create a new post, we won't have a postid yet, so set $showHide to true
-    if($_GET['action'] == 'post2') $showHide = true;
+    if(isset($_GET['action']) && $_GET['action'] == 'post2') $showHide = true;
 
     if(allowedTo('hide_see_through')) {
         $showHide = true;
