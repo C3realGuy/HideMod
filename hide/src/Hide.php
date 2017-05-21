@@ -42,18 +42,18 @@ function bbc_validate_hide_bbc(&$tag, &$content, &$disabled) {
     if($showHide) {
         if($bbc_type != 'quote') {
 
-            $tag['content'] = isset($settings['hidemod_hide_unlocked_before']) ? translate_lang_strings($settings['hidemod_hide_unlocked_before']) : 'DEFAULT HIDE UNLOCKED BEFORE:<br>';
+            $tag['content'] = isset($settings['hide_hide_unlocked_before']) ? translate_lang_strings($settings['hide_hide_unlocked_before']) : 'DEFAULT HIDE UNLOCKED BEFORE:<br>';
             $tag['content'] .= parse_bbc($content, $bbc_type, $bbc_options);
-            $tag['content'] .= isset($settings['hidemod_hide_unlocked_after']) ? translate_lang_strings($settings['hidemod_hide_unlocked_after']) : '';
+            $tag['content'] .= isset($settings['hide_hide_unlocked_after']) ? translate_lang_strings($settings['hide_hide_unlocked_after']) : '';
         } else {
             $tag['content'] = '[hide]' . parse_bbc_quote($content) .'[/hide]';
         }
     } else {
         if($bbc_type != 'quote') {
-            $tag['content'] = translate_lang_strings($settings['hidemod_hide_locked']);
+            $tag['content'] = translate_lang_strings($settings['hide_hide_locked']);
         } else {
             $tag['content'] = '[hide]';
-            $tag['content'] .= isset($settings['hidemod_hide_locked_quote']) ? translate_lang_strings($settings['hidemod_hide_locked_quote']) : '*** DEFAULT HIDDEN CONTENT: LIKE TO SEE ***';
+            $tag['content'] .= isset($settings['hide_hide_locked_quote']) ? translate_lang_strings($settings['hide_hide_locked_quote']) : '*** DEFAULT HIDDEN CONTENT: LIKE TO SEE ***';
             $tag['content'] .= '[/hide]';
         }
     }
@@ -84,19 +84,19 @@ function bbc_validate_hide_reply_bbc(&$tag, &$content, &$disabled) {
 
     if($showHide) {
         if($bbc_type != 'quote') {
-            $tag['content'] = isset($settings['hidemod_hide_reply_unlocked_before']) ? translate_lang_strings($settings['hidemod_hide_reply_unlocked_before']) : 'DEFAULT HIDE-REPLY UNLOCKED BEFORE:<br>';
+            $tag['content'] = isset($settings['hide_hide_reply_unlocked_before']) ? translate_lang_strings($settings['hide_hide_reply_unlocked_before']) : 'DEFAULT HIDE-REPLY UNLOCKED BEFORE:<br>';
             $tag['content'] .= parse_bbc($content, $bbc_type, $bbc_options);
-            $tag['content'] .= isset($settings['hidemod_hide_reply_unlocked_after']) ? translate_lang_strings($settings['hidemod_hide_reply_unlocked_after']) : '';
+            $tag['content'] .= isset($settings['hide_hide_reply_unlocked_after']) ? translate_lang_strings($settings['hide_hide_reply_unlocked_after']) : '';
 
         } else{
             $tag['content'] = '[hide-reply]' . parse_bbc_quote($content) . '[/hide-reply]';
         }
     } else {
         if($bbc_type != 'quote') {
-            $tag['content'] = translate_lang_strings($settings['hidemod_hide_reply_locked']);
+            $tag['content'] = translate_lang_strings($settings['hide_hide_reply_locked']);
         } else {
             $tag['content'] = '[hide-reply]';
-            $tag['content'] .= isset($settings['hidemod_hide_reply_locked_quote']) ? translate_lang_strings($settings['hidemod_hide_reply_locked_quote']) : '*** DEFAULT HIDDEN CONTENT: REPLY TO SEE ***';
+            $tag['content'] .= isset($settings['hide_hide_reply_locked_quote']) ? translate_lang_strings($settings['hide_hide_reply_locked_quote']) : '*** DEFAULT HIDDEN CONTENT: REPLY TO SEE ***';
             $tag['content'] .= '[/hide-reply]';
         }
     }
