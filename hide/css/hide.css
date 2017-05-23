@@ -1,31 +1,32 @@
+$color_border = rgb(203,203,203)
+
 .bbc_hide
     background-color: rgb(249,248,253)
     margin: 1em 40px 1em 0
-    border: 1px solid rgb(205,194,234)
+    border: 1px solid $color_border
     border-radius: 1px
     overflow: auto
-    border-color: rgb(205,194,234)
+    border-color: $color_border
 
 
 .bbc_hide_header
     font-size: 13px
-    color: rgb(62,52,93)
     background-color: #FFF
     background-repeat: repeat-x
     background-position: top
     padding: 10px
-    border-bottom: 1px solid rgb(205,194,234)
-    border-left: 2px solid rgb(77,58,129)
+    border-bottom: 1px solid $color_border
+    border-left: 2px solid $color_border
 
 
 .bbc_hide_content
     overflow: hidden
     position: relative
-    background-color: rgb(249,248,253)
+    background-color: #FFF
     background-repeat: repeat-x
     background-position: top
     padding: 10px
-    border-left: 2px solid rgb(77,58,129)
+    border-left: 2px solid $color_border
 
 
 .bbc_hide_closed .bbc_hide_header
