@@ -38,7 +38,7 @@
         <add>
     // Hide: Check if we contain a valid [hide] tag
     loadPluginSource('CerealGuy:Hide', 'src/Subs-Hide');
-    $contains_hide = containsHide($body);
+    $contains_hide = isset($body) ? containsHide($body) : false;
 
     $allowed_hide_see_through = allowedTo('hide_see_through');
     $now_liked = $is_liked = wesql::num_rows($request) != 0; // Hide
