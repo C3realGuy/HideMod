@@ -28,7 +28,6 @@ function userHasRepliedToTopic($user_id, $topic_id) {
 
 function getPostId() {
   global $bbc_options, $bbc_type;
-  log_error(print_r([$bbc_options, $bbc_type], true));
   // If we're lucky, bbc_options['cache'] tells us the post id
   if(isset($bbc_options['cache'])) return $bbc_options['cache'];
   if($bbc_type == 'quote') return (int) $_REQUEST['quote'];

@@ -7,6 +7,10 @@ $color_border = rgb(203,203,203)
     border-radius: 1px
     overflow: auto
     border-color: $color_border
+    width: 92%;
+    margin-left: 3%;
+    margin-right: 3%;
+    text-align: left;
 
 
 .bbc_hide_header
