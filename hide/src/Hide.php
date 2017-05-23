@@ -19,11 +19,8 @@ function bbc_validate_hide_bbc(&$tag, &$content, &$disabled) {
     // Maybe we already checked this post? (multiple hides)
     $showHide = (isset($bbc_options['show_hide_like']) && $bbc_options['show_hide_like'] == true) ? true : null;
 
-    // if we just create a new post, we won't have a postid yet, so set $showHide to true
-    if(isset($_GET['action']) && $_GET['action'] == 'post2') $showHide = true;
-
-    // Now Likes in pm, so always set true
-    if($bbc_type == 'pm') $showHide = true;
+    // There are possibilities to set showHide to true, for example for pms or post previews
+    if(in_array($bbc_type, ['preview', 'pm'])|| isset($_GET['action']) && $_GET['action'] == 'post2') $showHide = true;
 
     if (allowedTo('hide_see_through')) {
         $showHide = true;
@@ -71,8 +68,8 @@ function bbc_validate_hide_reply_bbc(&$tag, &$content, &$disabled) {
     // Maybe we already checked this post? (multiple hides)
     $showHide = (isset($topicinfo['show_hide_reply']) && $topicinfo['show_hide_reply'] == true) ? true : null;
 
-    // Now real replies in pm, so always set true
-    if($bbc_type == 'pm') $showHide = true;
+    // There are possibilities to set showHide to true, for example for pms or post previews
+    if(in_array($bbc_type, ['preview', 'pm'])|| isset($_GET['action']) && $_GET['action'] == 'post2') $showHide = true;
 
     // if we just create a new post, we won't have a postid yet, so set $showHide to true
     if(isset($_GET['action']) && $_GET['action'] == 'post2') $showHide = true;
