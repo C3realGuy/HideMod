@@ -47,13 +47,13 @@
         <function point="display_prepare_post" function="hide_display_prepare_post" filename="$plugindir/src/Hooks-Hide" />
     </hooks>
     <bbcodes>
-        <bbcode tag="hide" type="unparsed_content" block-level="no">
+        <bbcode tag="hide" type="unparsed_content" block-level="yes">
             <content>HIDDEN CONTENT: Like to see</content>
             <!-- validate-func is only for old wedge versions, newer ones should pick process -->
             <validate-func>loadPluginSource('CerealGuy:Hide', 'src/Hide'); bbc_validate_hide_bbc($tag, $data, $disabled);</validate-func>
       		<process file="src/Hide" function="bbc_validate_hide_bbc" />
         </bbcode>
-        <bbcode tag="hide-reply" type="unparsed_content" block-level="no">
+        <bbcode tag="hide-reply" type="unparsed_content" block-level="yes">
             <content>HIDDEN CONTENT: Reply to see</content>
             <validate-func>loadPluginSource('CerealGuy:Hide', 'src/Hide'); bbc_validate_hide_reply_bbc($tag, $data, $disabled);</validate-func>
       	    <process file="src/Hide" function="bbc_validate_hide_reply_bbc" />
